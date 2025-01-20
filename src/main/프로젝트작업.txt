@@ -1,0 +1,33 @@
+1. 프로젝트 만들기 : jdk17, gradle, groovy
+2. 프로젝트 사용할 초기 라이브러리(dependencies)
+    -https://start.spring.io/
+3. 프로젝트 폴더 세팅
+    java
+        koreweb (최상위패키지)              : 임의 패키지명 생성, 주로 홈페이지명으로 한다.
+            AppStart 클래스                : 스프링 시작 클래스
+            controller 패키지              : HTTP 매핑 관련 클래스들
+            model 패키지
+                - entity 패키지            : DB 매핑 관련 클래스들
+                - dto 패키지               : dto 데이터 이동객체 클래스들
+                - repository 패키지        : 자바의 비지니스 로직 처리하는 클래스들
+            service 패키지
+    resources
+        application.properties            :스프링 설정 파일
+        static 패키지                      : 정적파일(cssmjs,img등)
+            css 패키지
+            js 패키지
+            img 패키지
+            favicon.ico
+        templates 패키지                   : 동적파일( 타임리프, JSP 드읃ㅇ)
+
+4. 기본적인 application.properties 준비
+    1. server.port = 8080
+    2. spring.datasource.driverClassName = com.mysql.cj.jdbc.Driver
+    3. spring.datasource.url = jdbc:mysql://localhost:3306/korweb
+
+5. 레이아웃,  프론트엔드
+    1. ***스킬로 인정***부트스트랩( 레이아웃 / 디자인 ) : https://getbootstrap.kr/
+    2. 눈누( 폰트 ) : https://noonnu.cc/
+    3. 코드팬( 디자인 ) : https://codepen.io/
+    4. 어도비( 색상, 테마 ) : https://color.adobe.com/ko/
+        ========>
