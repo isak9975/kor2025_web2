@@ -11,8 +11,19 @@ public class ViewController {
 
 
     //[1] 메인페이지를 반환해주는 메소드
-    @GetMapping("")
+    @GetMapping("/index")
     public String index(){
         return "index.html";
     }
+
+    @GetMapping("/signup")
+    public String signup(){
+        return "member/signup.html";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "member/login.html";
+    }
+
 }
