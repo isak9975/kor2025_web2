@@ -1,65 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>signup</title>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div th:replace="~{/header.html::header}"></div>-->
-
-
-
-<!--<div class="col-md-10 mx-auto col-lg-5">-->
-<!--    <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">-->
-<!--        <p class="col-lg-10 fs-4"> 회원가입하세요</p>-->
-<!--        <div class="form-floating mb-3">-->
-<!--            <input type="text" class="form-control mid" id="IdInput" placeholder="Id" >-->
-<!--            <label for="IdInput">아이디를 입력하세요</label>-->
-<!--        </div>-->
-<!--        <div class="form-floating mb-3">-->
-<!--            <input type="password" class="form-control mpwd" id="PasswordInput" placeholder="Password">-->
-<!--            <label for="PasswordInput">비밀번호를 입력하세요</label>-->
-<!--        </div>-->
-
-<!--        <div class="form-floating mb-3">-->
-<!--            <input type="password" class="form-control mpwdchech" id="PasswordCheck" placeholder="Password">-->
-<!--            <label for="PasswordCheck">비밀번호를 확인하세요</label>-->
-<!--        </div>-->
-
-<!--        <div class="form-floating mb-3">-->
-<!--            <input type="password" class="form-control mname" id="NicknameInput" placeholder="Password">-->
-<!--            <label for="NicknameInput">닉네임을 입력하세요</label>-->
-<!--        </div>-->
-
-<!--        <div class="form-floating mb-3">-->
-<!--            <input type="password" class="form-control memail" id="EmailInput" placeholder="Password">-->
-<!--            <label for="EmailInput">이메일을 입력하세요</label>-->
-<!--        </div>-->
-
-
-
-<!--        <button id="signup" onclick="onSignUp()" class="w-100 btn btn-lg btn-primary" type="submit">회원가입</button>-->
-<!--        <hr class="my-4">-->
-<!--        <small class="text-body-secondary">sns 1초 로그인</small>-->
-<!--    </form>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-
-
-<!--<script src="/js/member/signup.js"></script>-->
-
-
-<!--</body>-->
-<!--</html>-->
-
-
-korweb
-100%
-B4
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -80,15 +18,14 @@ B4
 
         <!-- 오른쪽 구역 -->
         <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
-
+            <form id="signupForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control midInput" id="floatingInput" placeholder="ID">
+                    <input type="text" name="mid" class="form-control midInput" id="floatingInput" placeholder="ID">
                     <label for="floatingInput">계정아이디</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control mpwdInput" id="floatingPassword" placeholder="Password">
+                    <input type="password" name="mpwd" class="form-control mpwdInput" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">계정비밀번호</label>
                 </div>
 
@@ -98,13 +35,18 @@ B4
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control mnameInput" id="floatingInput" placeholder="Name">
+                    <input type="text" name="mname" class="form-control mnameInput" id="floatingInput" placeholder="Name">
                     <label for="floatingInput">닉네임</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control memailInput" id="floatingInput" placeholder="Email">
+                    <input type="text" name="memail" class="form-control memailInput" id="floatingInput" placeholder="Email">
                     <label for="floatingInput">이메일</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="file" name="uploadfile" class="form-control " id="floatingInput" placeholder="img">
+                    <label for="floatingInput">프로필사진</label>
                 </div>
 
                 <button class="w-100 btn btn-lg btn-primary" type="button" onclick="onSignUp()"> 회원가입 </button>
@@ -119,81 +61,3 @@ B4
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-</head>
-<body>
-
-<div th:replace="~{ /header.html :: header }"></div>
-
-<!-- 부트스트랩의 로그인 예시 붙여넣기 -->
-<div class="container col-xl-10 col-xxl-8 px-4 py-5">
-    <div class="row align-items-center g-lg-5 py-5">
-        <!-- 왼쪽 구역 -->
-        <div class="col-lg-7 text-center text-lg-start">
-            <h1 class="display-4 fw-bold lh-1 text-body-emphasis mb-3"> KOR IT WEB SIGNUP </h1>
-            <p class="col-lg-10 fs-4"> 다양한 서비스를 제공 합니다.</p>
-        </div>
-
-        <!-- 오른쪽 구역 -->
-        <div class="col-md-10 mx-auto col-lg-5">
-            <form class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control midInput" id="floatingInput" placeholder="ID">
-                    <label for="floatingInput">계정아이디</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control mpwdInput" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">계정비밀번호</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="password" class="form-control mpwdCheckInput" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">계정비밀번호 확인 </label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control mnameInput" id="floatingInput" placeholder="Name">
-                    <label for="floatingInput">닉네임</label>
-                </div>
-
-                <div class="form-floating mb-3">
-                    <input type="text" class="form-control memailInput" id="floatingInput" placeholder="Email">
-                    <label for="floatingInput">이메일</label>
-                </div>
-
-                <button class="w-100 btn btn-lg btn-primary" type="button" onclick="onSignUp()"> 회원가입 </button>
-                <hr class="my-4">
-                <small class="text-body-secondary"> SNS 1초 로그인 </small>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="/js/member/signup.js"> </script>
-
-</body>
-</html>
-
-
-
-
-
-
-
-스크린 리더 지원 사용 설정
-스크린 리더 기능을 사용하려면 Ctrl+Alt+Z을(를) 누르세요. 단축키에 대해 알아보려면 Ctrl+슬래시을(를) 누르세요.익명의 아이벡스님이 문서 작업에 참여했습니다.
