@@ -4,13 +4,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import korweb.model.dto.MemberDto;
+import korweb.model.dto.PointDto;
 import korweb.model.entity.MemberEntity;
+import korweb.model.entity.PointEntity;
 import korweb.model.repository.MemberRepository;
+import korweb.model.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MemberService {
@@ -19,8 +20,25 @@ public class MemberService {
 
     @Autowired private MemberRepository memberRepository;
 
+    @Autowired private FileService fileService;
+
     //회원가입
     public boolean regist(MemberDto memberDto){
+
+        // - 프로필 사진 첨부파일이 존재하면 업로드 진행
+            //(1) 만약에 업로드 파일이 비어 있으면 'default.jpg' 임시용 프로필 사진 등록한다.
+        if(memberDto.getUploadfile().isEmpty()){memberDto.setMimg("/resources/static/img/default.jpg");}
+            else{//(2) 아니고 업로드 파일이 존재하면, 파일 서비스 객체내 업로드 함수를 호출한다.
+                String fileName = fileService.fileUploard(memberDto.getUploadfile()); // 업로드 함수에 multipart 객체를 대입해준다
+
+                //(3) 만약에 업로드 후 반환된 값이 null 이면 업로드 실패, null 아니면 업로드 성공
+            if(fileName==null){return false;} // 업로드 실패 했으면 회원가입 실패
+            else{
+                memberDto.setMimg(fileName); // 업로드 성공한 uuid 파일명을 dto 에 대입한다.
+            }
+        }//end f
+
+
         //1. 저장할 Dto를 entity로 변환한다.
         MemberEntity memberEntity = memberDto.toEntity();
         //2. 변환된 entity를 save한다.
@@ -28,6 +46,11 @@ public class MemberService {
         MemberEntity result = memberRepository.save(memberEntity);
 
         if(result.getMno()>0){
+            PointDto pointDto = PointDto.builder()
+                    .pcontent("회원가입축하")
+                    .pcount(100)
+                    .build();
+            pointPayment(pointDto, memberEntity); //회원정보와 포인트 정보 전달 및 저장
             return true;
         }
 
@@ -61,6 +84,17 @@ public class MemberService {
         if(result == true){
             System.out.println("로그인성공");
             setSession(memberDto.getMid()); // 로그인 성공시 세션에 아이디 저장
+
+            //로그인 성공 했을때 1 point 지급
+            PointDto pointDto = PointDto.builder()
+                    .pcontent("로그인접속")
+                    .pcount(1).build();
+            //현재 로그인된 엔티티 찾기 //.findById(pk번호) : 지정한 pk번호의 엔티티 조회
+            MemberEntity memberEntity = memberRepository.findById(getMyInfo().getMno()).get();
+            //포인트 지급 함수 호출
+            pointPayment(pointDto,memberEntity);
+            //pointPayment(pointDto,memberDto.toEntity()); 이것도 되지 않나?
+
             return true;
         }
         else{
@@ -165,4 +199,17 @@ public class MemberService {
         return false;
     }
 
+    @Autowired private PointRepository pointRepository;
+    //[9] {부가 서비스} 포인트 지급 함수, 지급내용 pcontent / 지급수량 pcount , 내부적으로 실행되는 함수.
+    //지급 받는 회원 엔티티
+    public boolean pointPayment(PointDto pointDto, MemberEntity memberEntity){
+
+        PointEntity pointEntity = pointDto.toEntity();
+        pointEntity.setMemberEntity(memberEntity); //지급받는 회원엔티티 대입
+
+        PointEntity saveEntity = pointRepository.save(pointDto.toEntity());
+        if(saveEntity.getPno() >0){return true;}
+        else{return false;}
+    }
+//결제한 후 포인트를 주는거라
 }

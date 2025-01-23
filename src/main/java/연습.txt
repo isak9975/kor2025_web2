@@ -1,0 +1,88 @@
+목차
+1. MemberRepository
+
+================================
+MemberRepository
+<1>
+@Repository
+public interface MemberRepository extends JpaRepository<MemberEntity,Integer>{
+boolean existsByMidAndMpwd(String mid,String mpwd);
+
+MemberEntity findByMid(String mid);
+}
+<2>
+@Repository
+public interface MemberRepository extends JpaRepository<MemberEntity,Integer>{
+boolean existsByAndMpwd(String mid, String mpwd);
+
+MemberEntity findByMid(String mid);
+}
+<3>
+@Repository
+public interface MemberRepository extends JpaRepository<MemberEntity,Inteher>{
+boolean existsByAndMpwd(String mid, String mpwd);
+
+MemberEntity findByMid(String mid);
+}
+<4>
+@Repository
+public interface MemberRepository extends JpaRepository<MemberEntity,Integer>{
+boolean existsByAndMpwd(String mid, String mpwd);
+
+MemberEntity findByMid(String mid);
+}
+<5>
+@Repository
+public interface MemberRepository extends JpaRepository<MemberEntity,Integer>{
+boolean existsByAndMpwd(String mid, STring mpwd);
+
+MemberEntity findByMid(Strind mid);
+}
+
+MemberService
+<1>
+@Service
+public class MemberService{
+    @Autowired prviate MemberRepository memberRepository;
+    public boolean regist(MemberDto memberDto){
+    MemberEntity memberEntity = memberDto.toEntity();
+    memberEntity result = memberRepository.save(memberEntity);
+    if(result.getMno()>0){
+    return true;
+    }
+    return false;
+}
+public boolean login(MemberDto memberDto){
+boolean result = memberRepository.existsByMidAndMpwd(memberDto.getMid(),memberDto.getMpwd());
+
+if(result==true){
+System.out.print("로그인성공");
+setSession(memberDto.getMid());
+return true;
+}
+else{
+System.out.println("로그인실패");
+return false;
+}
+}
+
+@Autowired private HttpServletRequest request;
+public boolean setSession(String mid){
+    HttpSession httpSession = request.getSession();
+    Object object = httpSession.getAttribute("loginId");
+        if(Object != null){
+            String mid = (String)object;
+            return mid;
+        }
+        return null;
+}
+public boolean deleteSession(0{
+    httpSession httpSession = request.getSession();
+
+    httpSession.remove
+}
+
+<2>
+<3>
+<4>
+<5>
