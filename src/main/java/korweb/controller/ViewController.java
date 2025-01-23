@@ -18,12 +18,16 @@ public class ViewController {
 
     @GetMapping("/signup")
     public String signup(){
-        return "member/signup.html";
+        return "/member/signup.html";
     }
 
     @GetMapping("/login")
     public String login(){
-        return "member/login.html";
+        return "/member/login.html";
     }
+
+    //[4] 마이페이지를 반환해주는 메소드
+    @GetMapping("/myinfo")
+    public String myinfo(){return "/member/info.html";}
 
 }

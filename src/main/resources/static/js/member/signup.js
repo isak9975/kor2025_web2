@@ -1,4 +1,3 @@
-//[1] 회원가입 함수
 const onSignUp=()=>{
 
 console.log("onSignUp 실행");

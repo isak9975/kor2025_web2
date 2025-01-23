@@ -32,6 +32,12 @@ public interface MemberRepository extends JpaRepository<MemberEntity,Integer> {
         JPA : MemberEntity findByMid( String mid);
      */
 
+        //[1] 로그인 추상메소드 : existsBy필드명And필드명
+            //Dao : select * from member where mid = ? and mpwd = ?
     boolean existsByMidAndMpwd(String mid, String mpwd);
+
+        //[2] 아이디로 엔티티 조회 : findBy필드명
+            //Dao : select * from member where mid = ?
+    MemberEntity findByMid(String mid);
 
 }//end interface

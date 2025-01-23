@@ -22,7 +22,9 @@ fetch("/member/login.do",option)
 .then(r=>r.json())
 .then(d=>{
         if(d==true){
+
             alert("로그인 성공");
+
             location.href="/";
         }else{alert("회원정보가 일치하지 않습니다.")}
     })
