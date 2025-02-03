@@ -17,8 +17,8 @@ const getLoginMid = ( ) =>{
             html +=`<li class="nav-item">
                         <a class="nav-link" href="#">
                             <img src="/img/${ data.mimg }" style=" width:60px; height:60px; padding: 1px; object-fit: cover; border-radius: 30px;  border:1px solid #bfbebe;" />
-                            ${ data.mid }님
-                        <span class="pointbox"> </span> </a>
+                            ${ data.mid }님  </a>
+                        <span class="pointbox"> </span>
                     </li>
                     <li class="nav-item">  <a class="nav-link" href="#" onclick="logOut()"> 로그아웃 </a> </li>
                     <li class="nav-item">  <a class="nav-link" href="/member/info"> 마이페이지 </a> </li>`
