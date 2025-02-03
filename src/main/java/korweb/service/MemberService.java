@@ -4,11 +4,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import korweb.model.dto.MemberDto;
+import korweb.model.dto.PointDto;
 import korweb.model.entity.MemberEntity;
+import korweb.model.entity.PointEntity;
 import korweb.model.repository.MemberRepository;
+import korweb.model.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,21 +23,40 @@ public class MemberService {
 
     @Autowired private MemberRepository memberRepository;
 
+    @Autowired private FileService fileService;
+
     //회원가입
     public boolean regist(MemberDto memberDto){
-        //1. 저장할 Dto를 entity로 변환한다.
-        MemberEntity memberEntity = memberDto.toEntity();
-        //2. 변환된 entity를 save한다.
-        //3. save(영속속/연결된) 엔티티의 회원번호가 0보다 크면 성공
-        MemberEntity result = memberRepository.save(memberEntity);
-
-        if(result.getMno()>0){
-            return true;
+        // day70 : - 프로필사진 첨부파일 존재하면 업로드 진행
+        // (1) 만약에 업로드 파일이 비어 있으면 'default.jpg' 임시용 프로필 사진 등록한다.
+        if( memberDto.getUploadfile().isEmpty() ){
+            memberDto.setMimg( "default.jpg");
+        }
+        else { // (2) 아니고 업로드 파일이 존재하면 , 파일 서비스 객체내 업로드 함수를 호출한다.
+            String fileName = fileService.fileUpload( memberDto.getUploadfile() ); // 업로드 함수에 multipart 객체를 대입해준다.
+            // (3) 만약에 업로드 후 반환된 값이 null 이면 업로드 실패 , null 아니면 업로드 성공
+            if( fileName == null ){ return false; } // 업로드 실패 했으면 회원가입 실패
+            else{
+                memberDto.setMimg( fileName ); // 업로드 성공한 uuid+파일명 을 dto에 대입한다.
+            }
         }
 
-        //아니면 실패
-        return false;
-
+        // 1.  저장할 dto를 entity 로 변환한다.
+        MemberEntity memberEntity = memberDto.toEntity();
+        // 2. 변환된 entity를 save한다.
+        // 3. save(영속성/연결된) 한 엔티티를 반환 받는다.
+        MemberEntity saveEntity = memberRepository.save( memberEntity );
+        // 4. 만약에 영속된 엔티티의 회원번호가 0보다 크면 회원가입 성공
+        if( saveEntity.getMno() > 0 ){
+            // day69실습 : 포인트 지급
+            PointDto pointDto = PointDto.builder()
+                    .pcontent("회원가입축하")
+                    .pcount( 100 )
+                    .build();
+            pointPayment( pointDto , memberEntity );
+            return true;
+        }
+        else{ return  false;}
     }
 
 //    로그인
@@ -164,5 +187,54 @@ public class MemberService {
         //비로그인 상태이면
         return false;
     }
+
+
+    @Autowired private PointRepository pointRepository;
+
+    // [9] (부가서비스) 포인트 지급 함수 . 지급내용 pcontent / 지급수량 pcount , 지급받는회원엔티티
+    @Transactional
+    public boolean pointPayment( PointDto pointDto , MemberEntity memberEntity ){
+
+        PointEntity pointEntity = pointDto.toEntity();
+        pointEntity.setMemberEntity( memberEntity ); // 지급받는 회원엔티티 대입
+
+        PointEntity saveEntity = pointRepository.save( pointEntity  );
+        if( saveEntity.getPno() > 0 ){return true; }
+        else{ return false; }
+    } // f end
+
+    // [10] 내 포인트 지급 전제 내역 조회
+    public List<PointDto> pointList(){
+        // 1. (로그인된) 내정보 가져오기
+        String mid = getSession();
+        MemberEntity memberEntity = memberRepository.findByMid( mid );
+        // 2. 내 포인트 조회하기
+        List<PointEntity> pointEntityList = pointRepository.findByMemberEntity( memberEntity );
+        // 3. 조회된 포인트 엔티티를 dto로 변환
+        List<PointDto> pointDtoList = new ArrayList<>();
+        pointEntityList.forEach( (entity) ->{
+            pointDtoList.add( entity.toDto() );
+        });
+        return  pointDtoList;
+    }
+
+    // [11] 현재 내 포인트 조회
+    public int pointInfo(){
+        // 1. (로그인된) 내정보 가져오기
+        String mid = getSession();
+        MemberEntity memberEntity = memberRepository.findByMid( mid );
+        // 2. 내 포인트 조회하기
+        List<PointEntity> pointEntityList = pointRepository.findByMemberEntity( memberEntity );
+        // 3. 조회된 포인트 엔티티의 합계 구하기.
+        int myPoint = 0;
+        for( int index = 0 ; index<=pointEntityList.size()-1 ; index++ ){
+            myPoint += pointEntityList.get(index).getPcount();
+        }
+        return  myPoint;
+    }
+
+
+
+
 
 }

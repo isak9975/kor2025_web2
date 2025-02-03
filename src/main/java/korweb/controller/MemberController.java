@@ -1,9 +1,12 @@
 package korweb.controller;
 
 import korweb.model.dto.MemberDto;
+import korweb.model.dto.PointDto;
 import korweb.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class MemberController {
@@ -11,9 +14,14 @@ public class MemberController {
     @Autowired private MemberService memberService;
 
     //회원가입
+//    @PostMapping("/member/signup.do")
+//    public boolean regist(@RequestBody MemberDto memberDto){
+//        return memberService.regist(memberDto);
+//    }
+
     @PostMapping("/member/signup.do")
-    public boolean regist(@RequestBody MemberDto memberDto){
-        return memberService.regist(memberDto);
+    public boolean signup( MemberDto memberDto ){ // @RequestBody 를 사용하지 않는다. Application/json 아니라서.
+        return memberService.regist( memberDto );
     }
 
     //로그인
@@ -53,4 +61,19 @@ public class MemberController {
     }
 
     //회원정보 조회
+    // [10] 내 포인트 지급 전제 내역 조회
+    @GetMapping("/member/point/list.do")
+    public List<PointDto> pointList(){
+        return memberService.pointList();
+    }
+    // [11] 현재 내 포인트 조회
+    @GetMapping("/member/point/info.do")
+    public int pointInfo(){
+        return memberService.pointInfo();
+    }
+
+
+
+
+
 }
