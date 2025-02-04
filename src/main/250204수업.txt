@@ -11,3 +11,19 @@ chat GPT 를 사용하여 포트폴리오 데이터를 만들어 달라고 하�
 3.E-R 다이어 그램 생성
     1) MYSQL WORKBENCH
     2) 상단메뉴의 [DATABASE] --> [Reverse Engineer] --> [NEXT]
+
+    = 정의 =
+    + and +
+    (생략)
+    [YES|No]
+    {반복}
+    **주석**
+
+
+관계
+연관
+집합
+포함
+일반환
+읜존
+실체화
