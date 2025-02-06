@@ -8,22 +8,22 @@ import org.springframework.web.multipart.MultipartFile;
 @AllArgsConstructor@NoArgsConstructor
 public class MemberDto {
 
-    private int mno; // 회원 번호
+    private int mno;
 
-    private String mid; // 회원 아이디
+    private String mid;
 
-    private String mpwd; // 회원 비밀번호
+    private String mpwd;
 
-    private String mname; // 회원 닉네임
+    private String mname;
 
-    private String memail; // 회원 이메일
+    private String memail;
 
-    private String mimg; // 회원 프로필 사진명
+    private String mimg;
 
-    private MultipartFile uploadfile; // 업로드 파읾
+    private MultipartFile uploadfile; // 업로드 파일객체
 
     public MemberEntity toEntity(){
-        return MemberEntity.builder().mno(this.mno).mid(this.mid).mpwd(this.mpwd).mname(this.mname).memail(this.memail).mimg(this.mimg).build();
+        return MemberEntity.builder().mno(this.mno).mid(this.mid).mpwd(this.mpwd).mname(this.mname).memail(this.memail).mimg( this.mimg) .build();
     }
 
 }

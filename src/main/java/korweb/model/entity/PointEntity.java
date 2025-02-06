@@ -3,29 +3,41 @@ package korweb.model.entity;
 import jakarta.persistence.*;
 import korweb.model.dto.PointDto;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.format.DateTimeFormatter;
 
-@Getter@Setter@Builder
-@AllArgsConstructor@NoArgsConstructor
-@Entity@Table(name="point")
-public class PointEntity extends BaseTime{
-    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int pno;
+@Getter
+@Setter
+@ToString
+@Builder // 룸복
+@AllArgsConstructor
+@NoArgsConstructor // 룸복
+@Entity // 엔티티
+@Table( name = "point")
+public// 테이블명
+class PointEntity extends BaseTime {
 
-    @Column(columnDefinition = "varchar(30)", nullable = false)
-    private String pcontent;
+    @Id // pk
+    @GeneratedValue( strategy = GenerationType.IDENTITY ) // auto_increment
+    private int pno; // 포인트 식별자
 
-    @Column(nullable = false, columnDefinition = "int")
-    private int pcount;
+    @Column( nullable = false  , columnDefinition = "varchar(30)")
+    private String pcontent; // 포인트 지급내용 : 회원가입 , 로그인 , 글쓰기
 
-    @ManyToOne //Fk
-    @JoinColumn(name="mno")
+    @Column( nullable = false , columnDefinition = "int" )
+    private int pcount; // 포인트 지급수량 : 100 , 1 , -10
+
+    @ManyToOne  // FK
+    @JoinColumn(name = "mno")
     private MemberEntity memberEntity;
 
-    //enetity --> dto 변환함수
-    public PointDto pointDto(){
-        return PointDto.builder().pno(this.pno).pcontent(this.pcontent).pcount(this.pcount).cdate(this.getCdate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss"))).build();
+    // entity --> dto 변환함수
+    public PointDto toDto(){
+        return PointDto.builder()
+                .pno( this.pno )
+                .pcontent( this.pcontent )
+                .pcount( this.pcount )
+                .cdate( this.getCdate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) )
+                .build();
     }
 }

@@ -1,37 +1,30 @@
 package korweb.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-//===================템플릿 변환하는 컨트롤러 클래스 ==============//
+// ============= 템플릿 반환 하는 컨트롤러 클래스 =========== //
 @Controller
 public class ViewController {
 
+    // [1] 메인 페이지를 반환해주는 메소드
+    @GetMapping("/index") // http://localhost:8080
+    public String index(){   return "index.html"; }
 
+    // [2] 로그인 페이지를 반환해주는 메소드
+    @GetMapping("/member/login")
+    public String login(){ return "/member/login.html"; }
 
-    //[1] 메인페이지를 반환해주는 메소드
-    @GetMapping("/index")
-    public String index(){
-        return "index.html";
-    }
+    // [3] 회원가입 페이지를 반환해주는 메소드
+    @GetMapping("/member/signup")
+    public String signup(){ return "/member/signup.html"; }
 
-    @GetMapping("/signup")
-    public String signup(){
-        return "/member/signup.html";
-    }
+    // [4] 마이페이지 를 반환 해주는 메소드
+    @GetMapping("/member/info")
+    public String myInfo(){ return "/member/info.html";}
 
-    @GetMapping("/login")
-    public String login(){
-        return "/member/login.html";
-    }
+    // [5] 수정페이지 를 반환 해주는 메소드
+    @GetMapping("/member/update")
+    public String myUpdate(){ return "/member/update.html";}
 
-    //[4] 마이페이지를 반환해주는 메소드
-    @GetMapping("/myinfo")
-    public String myinfo(){return "/member/info.html";}
-
-    //[5] 수정페이지를 반환해주는 메소드
-    @GetMapping("/update")
-    public String myUpdate(){return "/member/update.html";}
-
-}
+} // class end
