@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- 헤더 html 플러그인 가져오기-->
+<div th:replace="~{/header.html::header}"> </div>
+
+<div class="container"> <!-- container 부스트스랩 css -->
+
+<!--    <a href ="board/write">글쓰기</a>-->
+    <button class="btn btn-primary" type="button" onclick="location.href='/board/write'"> 글쓰기 </button>
+
+    <table class="table"> <!-- table 부트스트랩 css -->
+        <thead>
+            <tr>
+                <td> 번호</td>
+                <td> 제목</td>
+                <td> 작성자</td>
+                <td> 조회수</td>
+                <td> 작성일</td>
+
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+
+</div>
+
+<script src="/js/board/board.js"></script>
+</body>
+</html>

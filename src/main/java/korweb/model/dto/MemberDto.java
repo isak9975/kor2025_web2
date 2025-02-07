@@ -22,6 +22,10 @@ public class MemberDto {
 
     private MultipartFile uploadfile; // 업로드 파일객체
 
+    private String cdate;
+
+    private String udate ;
+
     public MemberEntity toEntity(){
         return MemberEntity.builder().mno(this.mno).mid(this.mid).mpwd(this.mpwd).mname(this.mname).memail(this.memail).mimg( this.mimg) .build();
     }
