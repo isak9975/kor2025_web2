@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!--  썸머노트 api 에 필요한 css 임포트-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.9.1/summernote-bs5.min.css" integrity="sha512-rDHV59PgRefDUbMm2lSjvf0ZhXZy3wgROFyao0JxZPGho3oOuWejq/ELx0FOZJpgaE5QovVtRN65Y3rrb7JhdQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+
+<!-- 헤더 html 플러그인 가져오기-->
+<div th:replace="~{/header.html::header}"> </div>
+
+<div class="container"> <!-- container 부스트스랩 css -->
+  <form>
+      <select class="form-select cno">
+        <option value="1">뉴스</option>
+        <option value="2">이벤트</option>
+        <option value="3">FAQ</option>
+        <option value="4">튜토리얼</option>
+        <option value="5">사용자리뷰</option>
+      </select><br/>
+
+    <input type="text" class="form-control btitle" placeholder="게시물 제목 입력해주세요" /><br/>
+    <!--   썸머 노트 id가 포함된 마크업 넣기-->
+    <textarea id="summernote" name="editordata" class="bcontent"></textarea>
+    <button type="button" class="btn btn-primary" onclick="onWirte()"> 게시하기 </button>
+  </form>
+</div>
+
+<!--JQUERY = 자바스크립트 기반의 라이브러러리) 최신 버전 임포트-->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!--썸머노트 api 에 필요한 JS 임포트 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.9.1/summernote-bs5.min.js" integrity="sha512-qTQLA91yGDLA06GBOdbT7nsrQY8tN6pJqjT16iTuk08RWbfYmUz/pQD3Gly1syoINyCFNsJh7A91LtrLIwODnw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- 썸모 노트 api 한글 사용에 필요한 JS 임포트-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.9.1/lang/summernote-ko-KR.min.js" integrity="sha512-npFeJw8MO1QVbeFuD7rqVR1CpAbOnUMoYnZIxDbz58biKU52Unq7Av3cn+SZ2KD4yOLWj4bOcjIV1+d4aEXAyg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="/js/board/write.js"></script>
+
+</body>
+</html>

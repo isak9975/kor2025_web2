@@ -1,6 +1,7 @@
 package korweb.model.entity;
 
 import jakarta.persistence.*;
+import korweb.model.dto.BoardDto;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -41,6 +42,22 @@ public class BoardEntity extends BaseTime{
     //양방향?
 //    @OneToMany(mappedBy = "rcontent")
 //    List<ReplyEntity> replyEntityList = new ArrayList<>();
+
+    // entity --> Dto 변환 메소드
+    // 데이터베이스 저장된 entity 를 조회한 후 dto로 변환해야 하므로 필요
+    public BoardDto toDto(){
+        return BoardDto.builder()
+                .bno(this.bno)
+                .btitle(this.btitle)
+                .bcontent(this.btitle)
+                .bview(this.bview)
+                .mno(this.memberEntity.getMno())
+                .cno(this.categoryEntity.getCno())
+                .mid(this.memberEntity.getMid())
+                .cname(this.categoryEntity.getCname())
+                .cdate(this.getCdate().toString())
+                .build();
+    }
 
 
 

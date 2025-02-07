@@ -1,0 +1,61 @@
+인텔리제이 플러그인 추천
+    1. 레인보우
+    2. atom icon
+
+
+Controller 명세서
+Rest() API 명세서 작성해야하는 이유
+    1. [협업]프론트엔드 개발자와 백엔드 개발자의 중간 설계도 : 프론트엔드 개발자는 명세서만 보고 구현, 백엔드 개발자는 명세서만 보고 구현
+    2. [유지보스]개발 시간이 지나고 유지보수 할때, 인수인꼐, 개발안내서 등등 용도로 사용될 수 있다.
+    3. [포트폴리오]
+    4. [공부]코드 작성하기 전에 전반적인 코드 흐름 파악/ 매개 변수와 리턴값
+        * 회사마다 코드가 다름
+    (작성방법)
+        1. 요청 설명 : 통신 함녀 어떠한 서비스를 처리 할지 간단하게 설명
+        2. HTTP URL 은 중복 없이 임의의 주소 마늗ㄹ기(정의, 단 HTTP URL 과 HTTP METHOD 가 모두 동일할 수 없다. * do, view 반환하는
+        3. HTTP METHOD 을 선택(RESR  : POST, GET, PUT, DELETE), 단 : BODY 통신은 (POST, PUT) 만 가능하고, queryString 통신은(post,get,delete) from-data 통신은 (post,put) 가능
+        4. 관례적으로 content-type 선택
+            queryString
+            application/json
+            multipart/form-data
+        5. @RestController 모든의 content-type 자동으로 설정한다. @ResponseBody 포함
+            String                  text/plain
+            그외 모든 객체 / 자료   application/json
+        6. HTTP request content ex) : 클라이언트 / 유저 으로 받을 자료들을 샘플링 * 서버가 클라이언트 (Js fetch)로 부터 무엇을 받을지 판단 / 예측
+
+                                                             HTTP 요청 정보                                                                                                             HTTP 응답 정보
+순번 요청(서비스)설명                                        HTTP URL                HTTP METHOD     HTTP Request Content-Type   HTTP request content mapping  HTTP requestContent ex)
+     1. 회원가입요청                                         /member/signup.do        POST            multipart/form-data
+     2. 로그인 요청                                          /member/login.do         POST            application/json           @RequestBody                  form{mid:
+     3. 현재 로그인된 회원 아이디 조회                       /member/login/id.do      GET                X
+     4. 현재 로그인된 회원 로그아웃 요청                     /member/logout.do        GET                 X
+     5. 현재 로그인된 회원 정보 조회                         /member/myinfo.do        GET               x
+     6. 현재 로그인된 회원 탈퇴                              /member/delete.do        DELETE             x
+     7. 현재 로그인된 회원정보 수정                          /member/update.do        PUT             application/json            @RequestBody
+     8. 현재 로그인된 회원의 포인트 지급 내역 전체 조회      /member/point/list.do    GET                  x
+     9. 현재 로그인도니 회원의 (남은) 포인트 조회            /member/point/info.do    GET                x
+
+
+
+
+
+13) UML
+unified Modeling Language
+unified Modeling Language
+Unified Modeling Language
+시스템 개발과 과정의 의사소통을 위해 만든, 대표적인 객체지향 모델링 언어
+대표적인 객체 지향 모델링 언어/ 시스템 개발과 과정의 의사소통을 위해서 만듬
+시스템 개발과 과정의 의사소통을 위해 만든, 대표적인 객체지향 모델링 언어
+
+Rumbaugh, booch, jacobson의 객체 지향 방법론의 장점 통합
+객체 지향 방법론 Rumbaugh, booth, jacobson
+
+관계(Relationship
+    aSSOCIATION
+    Association
+    Association
+    Association
+    Association연관
+    연관(Association Association Association Association Association Association
+    집합(Agreegation Aggregation Aggregation Aggregation Aggregation Aggregation
+    집합 Aggregation Aggregaion Aggregation Aggregation Aggregation Aggregation Aggregation Aggregation Aggregation
