@@ -1,6 +1,7 @@
 package korweb.controller;
 
 import korweb.model.dto.BoardDto;
+import korweb.model.dto.PageDto;
 import korweb.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +20,20 @@ public class BoardController {
         return boardService.boardWrite(boardDto);
     }
 
-//2. 게시물 전체 조회
+//2. 게시물 전체 조회 //카테고리별 게시물 조회 + 페이징 처리
     @GetMapping("/board/findall.do")
-    public List<BoardDto> boardFindAll(){
-        return boardService.boardFindAll();
+    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page){
+        return boardService.boardFindAll(cno,page);
     }
 
-//3. 게시물 개별 조회
+//3. 게시물 개별 조회 (개별)
     @GetMapping("/board/find.do")
     public BoardDto boardFind(@RequestParam int bno){
         //@RequestParam 은 없어도 돌아가지만 그래도 진행
         return boardService.boardFind(bno);
     }
 
-//4. 게시물 수정
+//4. 게시물 수정 (개별)
     @PutMapping("/board/update.do")
     public boolean boardUpdate(@RequestBody BoardDto boardDto){
         return boardService.boardUpdate(boardDto);
