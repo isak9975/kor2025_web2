@@ -9,10 +9,9 @@ console.log(new URL(location.href).searchParams.get('cno')) // 주소창의 cno�
 //[1] 게시물 전체 조회 요청 함수
 const findAll = () =>{ console.log('findAll 실행')
     //1. 현재 페이지 URL에서 매개변수 cno 값 구하기
-    const cno = new URL(location.href).searchParams.get('cno')
+    const cno = new URL(location.href).searchParams.get('cno');
     //2. fetch option
     const option = {method:"GET"}
-
     //3. fetch
     fetch(`/board/findall.do?cno=${cno}`,option)
         .then(response => response.json())
@@ -25,13 +24,19 @@ const findAll = () =>{ console.log('findAll 실행')
             let html = ``
             //7. 응답 자료를 반복문 이용하여 하나씩 순회해서 html 누적으로 더해주기
             data.forEach(board=>{
+
+                if(board.cno == cno){console.log('가능')
+                    console.log(board.cno);
+                    console.log(cno);
+
                 html += `<tr>
                             <td>${board.bno}</td>
-                            <td>${board.btitle}</td>
+                            <td><a href='/board/view?bno=${board.bno}'>${board.btitle}</a></td>
                             <td>${board.mid}</td>
                             <td>${board.bview}</td>
-                            <td>${board.cdata}</td>
+                            <td>${board.cdate}</td>
                         <tr>`
+                        }
             })
             //8. 반복문 종료후 html 변수에 누적된 <tr> 출력하기
             tbody.innerHTML = html;

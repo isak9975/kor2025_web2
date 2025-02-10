@@ -4,6 +4,8 @@ import korweb.model.entity.BoardEntity;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 @Setter@Getter@Builder
 @AllArgsConstructor@NoArgsConstructor
@@ -23,6 +25,9 @@ public class BoardDto {
      */
     private String mid; // 작성자의 회원 아이디
     private String cname; // 카테고리명
+
+    //+댓글 리스트
+    private List<Map<String,String>> replylist;
 
     /**
      Dto --> Entity 변환 메소드

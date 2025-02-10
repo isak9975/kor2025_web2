@@ -35,4 +35,8 @@ public class ViewController {
     @GetMapping("/board/write")
     public String boardWrite(){return "/board/write.html";}
 
+    //[8] 게시물 개별 조회 페이지를 반환 해주는 메소드
+    @GetMapping("/board/view")
+    public String boardView(){return "/board/view.html";}
+
 } // class end

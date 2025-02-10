@@ -1,10 +1,10 @@
-// * 썸모 노트 실행
+// * 썸머노트 실행
 $(document).ready(function() {
-  $('#summernote').summernote();
-    height:500, // 썸모 노트 게시물 높이 수정
-    lang:'ko-KR', // 썸머노트 설명 한글화
-    placeholder:'게시물 내용 입력해주세요' // 입력전 가이드라인들 정의
-
+  $('#summernote').summernote({
+    height : 500 , // 썸머노트 게시판의 높이조절 속성
+    lang : 'ko-KR', // 썸머노트 메뉴 한글화 속성
+    placeholder : '게시물 내용 입력해주세요' // 입력 전에 가이드라인 제공 속성
+  });
 });
 
 //[1] 게시물 등록 요청 함수

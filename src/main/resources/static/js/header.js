@@ -44,7 +44,7 @@ const logOut = ( ) => {
     const option = { method : 'GET' }
     // 2. fetch
     fetch( '/member/logout.do' , option )
-        .then( response => response.json() )
+        .then( r => r.json() )
         .then( data => {
             // 만약에 로그아웃 성공 했다면 로그인 페이지로 이동
             if( data == true ){ alert('로그아웃 했습니다.'); location.href="/member/login"; }
