@@ -28,7 +28,12 @@ const findAll = () =>{ console.log('findAll 실행')
             //6. 출력할 html 을 저장하는 변수 선언
             let html = ``
             //7. 응답 자료를 반복문 이용하여 하나씩 순회해서 html 누적으로 더해주기
-            data.forEach(board=>{
+                //2025.02.13 추가 + PageDto가 반환되었기 때문에
+                //+ 응답 자료의 게시물 리스트 추출
+                // date = {data:[], page: ,totalpage:...}
+                let boardList = data.data;
+
+            boardList.forEach(board=>{
 
                 if(board.cno == cno){console.log('가능')
                     console.log(board.cno);
@@ -45,10 +50,55 @@ const findAll = () =>{ console.log('findAll 실행')
             })
             //8. 반복문 종료후 html 변수에 누적된 <tr> 출력하기
             tbody.innerHTML = html;
+            //9. 게시물 출력 후 페이징 버튼 생성 함수 호출
+
+            printPageNation(data,cno);
+
         })
         .catch(e=>{console.log(e);})
-
-
-
 }//f end
 findAll(); // JS가 실행 될때 함수 실행
+
+
+
+//[2] 페이징 버튼 생성하는 함수
+const printPageNation = (data,cno) =>{
+    //(1) 어디에
+    const pagebox = document.querySelector(".pagebox")
+
+    let page = data.page; // 현재페이지 pageDto에 우리가 가져옴
+    let totalpage = data.totalpage; // 전체페이지
+    let startbtn = data.startbtn; //
+    let endbtn = data.endbtn; // 현재페이지의 페이징 버튼 끝번호
+
+
+    
+    //(2) 무엇을
+        let html = ``
+        //이전버튼, 현제페이지에서 -1 차감한 페이지 이동
+            //만약에 현제페이지가 1이하 이면 1고정, 아니면 -1
+        html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page${page<=1?1:page-1}">이전</a></li>`
+
+        //페이징 버튼
+
+
+        for(let index = startbtn; index<=endbtn; index++){
+            //만약에 현재 페이지와 버튼 번호가 같다면 .active 부트스트랩 클래스 부여
+            html += `
+                    <li class="page-item"><a class="page-link" ${page==index?'active':''} href="/board?cno=${cno}&page=${index}">${index}</a></li>`;
+            }
+
+        //다음버튼, 현재페이지에서 +1 증가한 페이지 이동
+            //만약에 +1 했을때 전체 페이지수 보다 이상이면 전체페이지수로 고정
+            //
+        html += `<li class="page-item"><a class="page-link" href="/board?cno=${cno}&page${page>=totalpage?totalpage:page+1}">다음</a></li>`
+
+    pagebox.innerHTML = html;
+
+
+    //(3)출력
+}
+
+
+
+

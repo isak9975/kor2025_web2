@@ -76,19 +76,20 @@ public class BoardService {
 
 
     ///2. 게시물 전체 조회
-    public PageDto boardFindAll(int cno, int page){
-        System.out.println("카테고리 번호" + cno); //카테고리 번호
-        System.out.println("페이지" + page);       //페이지 번호
+    public PageDto boardFindAll(int cno, int page, String key, String keyword){
+        System.out.println("cno = " + cno + ", page = " + page + ", key = " + key + ", keyword = " + keyword);
 
         //페이징처리 방법 : 1.SQL 2.라이브러리(*JPA*)
         //1. 페이징 처리 설정 , PageRequest.of ( 페이지번호, 페이지당개수, 정렬)
-        Pageable pageable = PageRequest.of(page-1,10,Sort.by(Sort.Direction.DESC,"bno"));
+        Pageable pageable = PageRequest.of(page-1,3,Sort.by(Sort.Direction.DESC,"bno"));
         //2. find~~ ( pageable ), find~~( pageable ) 매개변수로 설정 넣어주면 반환값은 Page
 
         //(1) 모든 게시물의 엔티티를 조회
 //        List<BoardEntity> boardEntityList = boardRepository.findAll();
         //(1) 특정 카테고리의 엔티티를 조회 + 페이징처리
-        Page<BoardEntity> boardEntityList = boardRepository.findByCategoryEntity_Cno(cno,pageable);
+        //(4) 특정한 카테고리의 키워드 검색 조회 + 페이징 처리
+        Page<BoardEntity> boardEntityList = boardRepository.findBySearch(cno,key,keyword,pageable);
+
         System.out.println("pageable 임"+boardEntityList); // 확인용 출력
 
         //(2) 모든 게시물의 엔티티를 Dto 로 변환

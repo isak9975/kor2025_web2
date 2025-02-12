@@ -20,11 +20,15 @@ public class BoardController {
         return boardService.boardWrite(boardDto);
     }
 
+
 //2. 게시물 전체 조회 //카테고리별 게시물 조회 + 페이징 처리
     @GetMapping("/board/findall.do")
-    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page){
-        return boardService.boardFindAll(cno,page);
+    public PageDto boardFindAll(@RequestParam int cno, @RequestParam int page, @RequestParam String key,@RequestParam String keyword){
+        //cno = 조회할 카테고리번호, page= 현재페이지번호,
+        // key = 검색할데이터의 속성명(btitle=제목 / bcontent=내용), keyword = 검색할 데이터
+        return boardService.boardFindAll(cno,page,key,keyword);
     }
+
 
 //3. 게시물 개별 조회 (개별)
     @GetMapping("/board/find.do")

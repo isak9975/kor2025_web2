@@ -29,6 +29,12 @@ public class BoardDto {
     //+댓글 리스트
     private List<Map<String,String>> replylist;
 
+    //
+    private String key;
+    private String keyword;
+
+
+
     /**
      Dto --> Entity 변환 메소드
      dto 를 entity 객체로 변환해서  데이터베이스에 저장 해야 하므로 변환이 필요하다
