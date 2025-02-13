@@ -64,7 +64,30 @@ const onReplyWrite=()=>{console.log('onReplyWrite() 실행')
 
 }
 
-//[3] 갭려 게시물의 존재하는 댓글 조회 요청 함수
-const onReplyFindAll=()=>{
-
-}
+// [3] 개별 게시물의 존재하는 댓글 조회 요청 함수
+const onReplyFindAll = ( ) => {
+	// [준비물] bno
+	const bno = new URL( location.href ).searchParams.get("bno");
+	// fetch queryString
+	fetch( `/reply/findall.do?bno=${bno}` )
+		.then( r => r.json() )
+		.then( data => {
+			console.log( data );
+			const replybox = document.querySelector('.replybox')
+			let html = ``;
+			data.forEach( reply =>{
+				html +=`<div class="card mt-3">
+						  <div class="card-header">
+						  	<img src="/img/${ reply.mimg}" style="width:30px;" />
+						    ${ reply.mid }
+						  </div>
+						  <div class="card-body">
+						     ${ reply.rcontent }
+						  </div>
+						</div>`
+			}); // for end
+			replybox.innerHTML = html;
+		})
+		.catch( e => { console.log(e); })
+} // class end
+onReplyFindAll();
