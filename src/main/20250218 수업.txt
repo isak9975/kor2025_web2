@@ -1,0 +1,34 @@
+[ 활용 가능한 API ]
+    1. 공공데이터포털(정부) : https://www.data.go.kr/
+    2. 여행 (정부) : https://api.visitkorea.or.kr/#/
+    3. 영화 (정부) : https://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
+    4. 부동산 (정부) : https://www.reb.or.kr/r-one/portal/openapi/openApiIntroPage.do
+    5. 카카오 API(로그인/지도) : https://developers.kakao.com/
+    6. 네이버 API : https://developers.naver.com/main/
+    7. 아임포트(결제) : https://portone.io/korea/ko/
+    등등, 그외 검색 하거나 강사의 문의
+
+[ 공공데이터 포털 ]
+    - 국가에서 보유한 정보/데이터 제공 하는 홈페이지
+    1. [로그인] (네이버/카카오) 로그인진행
+    2. 검색창 '필요한 api명' 검색
+
+[ 실습1 ]
+    인천광역시 부평구_인구 현황 :
+    1. [오픈API] 탭 클릭
+    5. [OPEN API 호출] 클릭
+        request url 확인
+         https://www.google.com/search?q=ttps%3A%2F%2Fapi.odcloud.kr%2Fapi%2F3044322%2Fv1%2Fuddi%3A466eee86-a8be-447b-9c8e-802bdbe897d7%3Fpage%3D1%26perPage%3D23%26serviceKey%3DFSxW1Y51O6jBlQvmAH%252FRch6vIMJALqYJ4NiNmmNiE0Mt%252BK%252F02JIsU7STJOfFGun2tk3WcBvfIlJ%252Fd9ouqhXoVA%253D%253D&oq=ttps%3A%2F%2Fapi.odcloud.kr%2Fapi%2F3044322%2Fv1%2Fuddi%3A466eee86-a8be-447b-9c8e-802bdbe897d7%3Fpage%3D1%26perPage%3D23%26serviceKey%3DFSxW1Y51O6jBlQvmAH%252FRch6vIMJALqYJ4NiNmmNiE0Mt%252BK%252F02JIsU7STJOfFGun2tk3WcBvfIlJ%252Fd9ouqhXoVA%253D%253D&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg60gEINzczN2owajeoAgewAgE&sourceid=chrome&ie=UTF-8
+        perPage=23 으로 수정
+        https://www.google.com/search?q=ttps%3A%2F%2Fapi.odcloud.kr%2Fapi%2F3044322%2Fv1%2Fuddi%3A466eee86-a8be-447b-9c8e-802bdbe897d7%3Fpage%3D1%26perPage%3D23%26serviceKey%3DFSxW1Y51O6jBlQvmAH%252FRch6vIMJALqYJ4NiNmmNiE0Mt%252BK%252F02JIsU7STJOfFGun2tk3WcBvfIlJ%252Fd9ouqhXoVA%253D%253D&oq=ttps%3A%2F%2Fapi.odcloud.kr%2Fapi%2F3044322%2Fv1%2Fuddi%3A466eee86-a8be-447b-9c8e-802bdbe897d7%3Fpage%3D1%26perPage%3D23%26serviceKey%3DFSxW1Y51O6jBlQvmAH%252FRch6vIMJALqYJ4NiNmmNiE0Mt%252BK%252F02JIsU7STJOfFGun2tk3WcBvfIlJ%252Fd9ouqhXoVA%253D%253D&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg60gEINzczN2owajeoAgewAgE&sourceid=chrome&ie=UTF-8
+    (내 홈페이지 호출하는 방법) fetch
+
+[ 실습2 ]
+    사업자 상태 조회
+
+[ 실습3 ]
+    부평구 맛집 출력
+
+[ 실습4 ]
+    차트를 표현하기
+    https://www.chartjs.org/docs/latest/

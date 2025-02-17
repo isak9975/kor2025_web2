@@ -39,4 +39,8 @@ public class ViewController {
     @GetMapping("/board/view")
     public String boardView(){return "/board/view.html";}
 
+    //[9] 공공 API 보여주는 페이지를 반환 해주는 메소드
+    @GetMapping("/api")
+    public String apiView(){return "/api.html";}
+
 } // class end
