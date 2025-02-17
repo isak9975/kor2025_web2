@@ -13,7 +13,7 @@
 
                      git(local)                                     |        git hub
         -----------------------------------------------------------------------------
-        git -> 폴더(working tree) --(uploard)--> stage area --(확인 commit)--> repository
+        git -> 폴더(working tree) --(upload)--> stage area --(확인 commit)--> repository
 
 * git
     인터넷 없이도 작업가능함
@@ -58,8 +58,9 @@
 
 * git push -u origin master
 
+* 다운로드 : 파일만 받아짐 수정을하면 다시 연결을 하고 올려야함
 
-
+ * 클론 : 연결된 채로 받아짐 수정하면 다시 올리기만 하면 됨.
 ========================================================
 왜 에러가 발생했는가 -> 오타
 에러문구 검색했더니 ~~~에러더라 -> 오타를 수정하여 해결했다
@@ -86,3 +87,9 @@ MarkUp 문법
 1)
 2)
 3)
+===================
+<과제>
+git hub desk top 을 사용하여.
+
+second repository 만들어서 readme.md 만들고
+클론해 보기.
