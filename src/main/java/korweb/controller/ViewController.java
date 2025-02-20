@@ -43,4 +43,12 @@ public class ViewController {
     @GetMapping("/api")
     public String apiView(){return "/api.html";}
 
+    //[10] 카카오 맵 API 보여주는 페이지를 반환 해주는 메소드
+    @GetMapping("/api2")
+    public String api2View(){return "/api2.html";}
+
+    //[11] chat
+    @GetMapping("/chat")
+    public String chatView(){return "/chat.html";}
+
 } // class end

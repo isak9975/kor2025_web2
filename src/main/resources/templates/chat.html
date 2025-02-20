@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div th:replace="~{ /header.html :: header }"></div>
+<div class="container">
+  <h3> 채팅방 </h3>
+</div>
+<div class="채팅내용구역">
+
+</div>
+<input type="text" class="메세지작성구역" />
+<div>
+<button type="button" onclick="메세지전송()">전송</button>
+</div>
+
+<script src="/js/api/chat.js"></script>
+</body>
+</html>

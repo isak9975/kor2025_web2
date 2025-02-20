@@ -43,8 +43,8 @@
     어떤 파일이 저장소 안에 있는지 커밋이 필요한 변경사항이 있는지
     현재 저장소의 어떤 Branch 에서 작업하고 있는지 등의 상태 정보 출력
 
-*git config --global user.name
-*git config --global user.email
+*git korweb.config --global user.name
+*git korweb.config --global user.email
 
 *git add .(. or -A)
 
