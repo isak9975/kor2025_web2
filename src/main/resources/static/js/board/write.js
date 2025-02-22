@@ -28,7 +28,7 @@ const onWrite=()=>{ console.log('onWrite() 실행')
         .then(d=>{
             if(d==true){console.log(' onWrite() fetch 실행')
             alert('글쓰기 성공')
-            location.href=`/board?cno${cno}`}
+            location.href=`/board?type${cno}`}
             else{
             alert('글쓰기 실패 : 로그인후 가능합니다')}
         })
