@@ -51,9 +51,9 @@ public class ViewController {
     @GetMapping("/chat")
     public String chatView(){return "/chat.html";}
 
-    //[10] 공공 API 보여주는 페이지를 반환 해주는 메소드2
-    @GetMapping("/api2")
-    public String api2View(){return "/api2.html";}
+//    //[12] 공공 API 보여주는 페이지를 반환 해주는 메소드2
+//    @GetMapping("/api2")
+//    public String kakaoView(){return "/api2.html";}
 
 
 } // class end

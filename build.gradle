@@ -31,6 +31,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // [6] WebSocket : 서버소켓 의존성
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    // [7] mybatis : 마이바티스 의존성
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.4'
 }
 
 tasks.named('test') {
