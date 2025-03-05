@@ -16,7 +16,7 @@ public class MemberEntity extends BaseTime{
     @Column(columnDefinition = "varchar(30)",nullable = false,unique = true)
     private String mid;
 
-    @Column(columnDefinition = "varchar(30)",nullable = false)
+    @Column(columnDefinition = "varchar(100)",nullable = false)
     private String mpwd;
 
     @Column(columnDefinition = "varchar(20)",nullable = false)
@@ -29,7 +29,9 @@ public class MemberEntity extends BaseTime{
     private String mimg;    // 회원 프로필사진명
 
     public MemberDto toDto(){
-        return MemberDto.builder().mno(this.mno).mid(this.mid).mpwd(this.mpwd).memail(this.memail).mname(this.mname).mimg( this.mimg) .build();
+        return MemberDto.builder().mno(this.mno).mid(this.mid)
+                .mpwd(this.mpwd)
+                .memail(this.memail).mname(this.mname).mimg( this.mimg) .build();
     }
 
 
