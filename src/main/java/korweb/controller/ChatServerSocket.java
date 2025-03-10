@@ -9,7 +9,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.util.List;
 import java.util.Vector;
 
-//[2]'TextWebSocketHandler' 클래스로부터 상속 받기
+//[2]'TextWebSocketHandler' 클래스로부터 상속예제 받기
 @Component // 현재 클래스를 빈 등록한다
 public class ChatServerSocket extends TextWebSocketHandler {
 

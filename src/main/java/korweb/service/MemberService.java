@@ -64,24 +64,24 @@ public class MemberService implements UserDetailsService {
         else{ return  false;}
     }
 
-////    로그인 //시큐리티 이후에 사용하지 않는다
+//    로그인 //시큐리티 이후에 사용하지 않는다
 //    public boolean login(MemberDto memberDto){
-////
-////        //[ 방법1 ]
-////        //(1) 모든 회원 엔티티를 조회한다.
-////         List<MemberEntity> memberEntityAll = memberRepository.findAll();
-////         //(2) 모든 회원 엔티티를 하나씩 조회한다.
-////         for(int index=0;index >= memberEntityAll.size()-1;index++){
-////             //==> forEach()문법 익히면 코드가 더욱 간단해 질듯
-////             if(memberEntityAll.get(index).getMid().equals(memberDto.getMid())){ //아이디 판독
-////                 if(memberEntityAll.get(index).getMpwd().equals(memberDto.getMpwd())){ //비밀번호 판도
-////                     System.out.println("로그인 성공");
-////                     return true;
-////                 }
-////             }
-////         }
-////        System.out.println("아이디 또는 비밀번호가 다릅니다");
-////        return false;
+//
+//        //[ 방법1 ]
+//        //(1) 모든 회원 엔티티를 조회한다.
+//         List<MemberEntity> memberEntityAll = memberRepository.findAll();
+//         //(2) 모든 회원 엔티티를 하나씩 조회한다.
+//         for(int index=0;index >= memberEntityAll.size()-1;index++){
+//             //==> forEach()문법 익히면 코드가 더욱 간단해 질듯
+//             if(memberEntityAll.get(index).getMid().equals(memberDto.getMid())){ //아이디 판독
+//                 if(memberEntityAll.get(index).getMpwd().equals(memberDto.getMpwd())){ //비밀번호 판도
+//                     System.out.println("로그인 성공");
+//                     return true;
+//                 }
+//             }
+//         }
+//        System.out.println("아이디 또는 비밀번호가 다릅니다");
+//        return false;
 //
 //        //[ 방법 2]
 //        boolean result = memberRepository.existsByMidAndMpwd(memberDto.getMid(),memberDto.getMpwd());
@@ -105,7 +105,7 @@ public class MemberService implements UserDetailsService {
         //(2) loadUserByUsername 메소드를 오버라이딩 한다
 
 
-    @Override
+    @Override //재정의 한다.
     public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
         System.out.println("mid  = " + mid); // 로그인이 입력받은 mid
         System.out.println("MemberService.loadUserByUsername");
