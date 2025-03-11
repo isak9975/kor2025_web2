@@ -16,7 +16,9 @@ const getLoginMid = ( ) =>{
             //3. 로그아웃 버튼 , 마이페이지 버튼 , 로그인된 아이디 활성화
             html +=`<li class="nav-item">
                         <a class="nav-link" href="#">
-                            <img src="/img/${ data.mimg }" style=" width:60px; height:60px; padding: 1px; object-fit: cover; border-radius: 30px;  border:1px solid #bfbebe;" />
+                            <img
+                            src="${data.mimg.includes('http')?data.mimg : '/img/'+ data.mimg }"
+                            style=" width:60px; height:60px; padding: 1px; object-fit: cover; border-radius: 30px;  border:1px solid #bfbebe;" />
                             ${ data.mid }님  </a>
                         <span class="pointbox"> </span>
                     </li>
