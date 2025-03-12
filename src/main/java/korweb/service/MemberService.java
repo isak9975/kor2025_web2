@@ -3,6 +3,7 @@ package korweb.service;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
+import korweb.model.dto.LoginDto;
 import korweb.model.dto.MemberDto;
 import korweb.model.dto.PointDto;
 import korweb.model.entity.MemberEntity;
@@ -73,8 +74,15 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
         //(9) DefaultOauth2User 타입으로 리턴 해야한다.
             //매개변수 3가지
                 //(1)권한 (2)사용자 정보 (3)식별키
-        DefaultOAuth2User user = new DefaultOAuth2User(null,profile,"nickname");
-        return user;
+//        DefaultOAuth2User user = new DefaultOAuth2User(null,profile,"nickname");
+
+        LoginDto loginDto = LoginDto.builder()
+                .mid(nickname)
+                //oauth2 회원은 패스워드가 없다.
+                .build();
+
+        return loginDto; //반환타입이 'OAuth2User'이지만
+        //loginDto 에서 'OAuth2User' 구현 했으므로 가능하다.
     }
 
     static boolean loginstatus = false;
@@ -156,8 +164,6 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
     //[2] : 시큐리티 에서의 로그인 함수
         //(1) 해당 서비스 클래스명 뒤에 implements UserDetailsService
         //(2) loadUserByUsername 메소드를 오버라이딩 한다
-
-
     @Override //재정의 한다.
     public UserDetails loadUserByUsername(String mid) throws UsernameNotFoundException {
         System.out.println("mid  = " + mid); // 로그인이 입력받은 mid
@@ -181,10 +187,16 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
             //User : 클래스 , UserDetails 를 구현하는 구현(객)체
                 //--> 시큐리티는  UserDetails 반환하면 자동으로 로그인 처리를 해준다.
                 // 단]입력 받은 id와 입력받은 id의 암호화된 password 를 넣어줘야한다
-        UserDetails user = User.builder().username(mid).password(password).build();
+//        UserDetails user = User.builder().username(mid).password(password).build();
+
+        LoginDto loginDto = LoginDto.builder()
+                .mid(mid)
+                .mpwd(password)
+                .build();
 
         //(5) UserDetails 반환.
-        return user;
+        return loginDto;//반환 타입이'UserDetails'이지만 LoginDto 로 반환해도 되는 이유.
+        //LoginDto 에서 'UserDetails' 구현(implements) 했으므로 가능하다.
     }
 
     public boolean login(MemberDto memberDto){
@@ -225,15 +237,19 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
         }
         //(3) 로그인 상태이면 로그인 구현할때 'loadUserByUserName' 메소드에서 반환한 UserDetails로 타입변환
             //*userDetails : 일반회원 타입 vs OAuth2User : oauth 회원 타입 ===> 타입별 구분해야한다, 통합이 필요하다
-            if(object instanceof UserDetails){//객체 instanceof 타입 : 객체가 지정한 타입인지 확인하는 키워드, 객체가 해당 타입이면 true 아니면 false
-                //현재 로그인 세션이 UserDetails 타입이면  true
-                UserDetails userDetails =(UserDetails)object;
-                loginMid = userDetails.getUsername();
-            }else if(object instanceof DefaultOAuth2User){
-                //현재 로그인 세션이 DefaultOAuth2User(oauth2회원) 타입이면
-                DefaultOAuth2User oAuth2User = (DefaultOAuth2User) object;
-                loginMid = oAuth2User.getAttributes().get("nickname").toString();
-            }
+//            if(object instanceof UserDetails){//객체 instanceof 타입 : 객체가 지정한 타입인지 확인하는 키워드, 객체가 해당 타입이면 true 아니면 false
+//                //현재 로그인 세션이 UserDetails 타입이면  true
+//                UserDetails userDetails =(UserDetails)object;
+//                loginMid = userDetails.getUsername();
+//            }else if(object instanceof DefaultOAuth2User){
+//                //현재 로그인 세션이 DefaultOAuth2User(oauth2회원) 타입이면
+//                DefaultOAuth2User oAuth2User = (DefaultOAuth2User) object;
+//                loginMid = oAuth2User.getAttributes().get("nickname").toString();
+//            }
+
+        //(3-1)LoginDto를 사용해서 UserDetails 와 OAuth2User 통합.
+        LoginDto loginDto = (LoginDto)object;
+        loginMid = loginDto.getMid();
         //(5) 로그인된 mid를 반환한다
         return loginMid;
     }
