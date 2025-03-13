@@ -11,6 +11,8 @@ import korweb.model.entity.PointEntity;
 import korweb.model.repository.MemberRepository;
 import korweb.model.repository.PointRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +27,7 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -76,8 +79,14 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
                 //(1)권한 (2)사용자 정보 (3)식별키
 //        DefaultOAuth2User user = new DefaultOAuth2User(null,profile,"nickname");
 
+        //(*) 권한부여하기.
+        List<GrantedAuthority> 권한목록 = new ArrayList<>();
+        권한목록.add(new SimpleGrantedAuthority("ROLE_USER"));
+        권한목록.add(new SimpleGrantedAuthority("ROLE_OAUTH"));
+
         LoginDto loginDto = LoginDto.builder()
                 .mid(nickname)
+                .mrolList(권한목록) //LoginDto 에 권한 목록 넣어주기.
                 //oauth2 회원은 패스워드가 없다.
                 .build();
 
@@ -189,9 +198,17 @@ public class MemberService implements UserDetailsService, OAuth2UserService<OAut
                 // 단]입력 받은 id와 입력받은 id의 암호화된 password 를 넣어줘야한다
 //        UserDetails user = User.builder().username(mid).password(password).build();
 
+        //(*) 권한/등급 부여하기. GrantedAuthority : 시큐리티 사용자의 권한 조작하는 인터페이스
+        //SimpleGrantedAuthority() : 시큐리티 사용자의 권한 클래스( 구현체 )
+        List<GrantedAuthority> 권한목록 = new ArrayList<>();
+        권한목록.add(new SimpleGrantedAuthority("ROLE_USER")); // 권한명 규칙 : ROLE_권한명
+        권한목록.add(new SimpleGrantedAuthority("ROLE_GENERAL")); // 권한은 여러개 넣을수 있다.
+        //DB에 존재하는 권한으로 부여할 수 있다. "ROLE_" + 변수명
+
         LoginDto loginDto = LoginDto.builder()
                 .mid(mid)
                 .mpwd(password)
+                .mrolList(권한목록) //LoginDto 에 권한목록 넣어주기.
                 .build();
 
         //(5) UserDetails 반환.

@@ -51,6 +51,10 @@ public class ViewController {
     @GetMapping("/chat")
     public String chatView(){return "/chat.html";}
 
+    //[12] 403(권한 접근 차단 매핑)error
+    @GetMapping("/error403")
+    public String error403(){return "/error403.html";}
+
 //    //[12] 공공 API 보여주는 페이지를 반환 해주는 메소드2
 //    @GetMapping("/api2")
 //    public String kakaoView(){return "/api2.html";}
